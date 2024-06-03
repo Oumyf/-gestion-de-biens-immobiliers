@@ -55,6 +55,30 @@ class BienController extends Controller
         return view('bien.listeBiens', compact('biens'));
     }
 
+    
+    public function modifierBien($id)
+    {
+        $bien = Bien::findOrFail($id);
+        return view('Bien.modifierBien', compact('bien'));
+    }
+
+    public function modifierBienTraitement(Request $request) {
+        $request->validate([
+            'nom' => 'required',
+            'description' => 'required',
+            'statut' => 'required',
+            'image' => 'required',
+        ]);
+        $bien = Bien::find($request->id);
+        $bien ->nom = $request->nom;
+        $bien ->description = $request->description;
+        $bien ->image = $request->image;
+        $bien ->statut = $request->statut;
+        $bien ->update();
+        return redirect('/bien')->with('status',"Le bien a bien été modifié avec succès");
+
+    }
+
     public function supprimerBien($id)
     {
         $bien = bien::findOrFail($id);
