@@ -3,12 +3,18 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategorieController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\HomeController;
 use App\Models\Categorie;
 
 
 Route::get('/register', [AuthController::class, 'register'])->name('register');
 Route::post('/register', [AuthController::class, 'registerPost'])->name('register');
 
+
+Route::get('/login', [AuthController::class, 'login'])->name('login');
+Route::post('/login', [AuthController::class, 'loginPost'])->name('login');
+
+Route::get('/home', [HomeController::class, 'index']);
 // Route group for categories
 Route::prefix('categories')->name('categories.')->group(function () {
     Route::get('/', [CategorieController::class, 'index'])->name('index');
