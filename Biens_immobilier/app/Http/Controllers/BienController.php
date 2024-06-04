@@ -49,5 +49,51 @@ class BienController extends Controller
         return redirect()->route('Bien.ajouterBien')->with('status', "Le bien a été ajouté avec succès");
 
     }
+
+    public function ListeBien(){
+        $biens = Bien::all();
+        return view('bien.listeBiens', compact('biens'));
+    }
+
+    public function afficher_details($id){
+        $bien = Bien::findOrFail($id);
+        return view('bien.details', compact('bien'));
+    }
+
+    // App\Http\Controllers\BienController.php
+
+
+
+    
+    public function modifierBien($id)
+    {
+        $bien = Bien::findOrFail($id);
+        return view('Bien.modifierBien', compact('bien'));
+    }
+
+    public function modifierBienTraitement(Request $request) {
+        $request->validate([
+            'nom' => 'required',
+            'description' => 'required',
+            'statut' => 'required',
+            'image' => 'required',
+        ]);
+        $bien = Bien::find($request->id);
+        $bien ->nom = $request->nom;
+        $bien ->description = $request->description;
+        $bien ->image = $request->image;
+        $bien ->statut = $request->statut;
+        $bien ->update();
+        return redirect('/bien')->with('status',"Le bien a bien été modifié avec succès");
+
+    }
+
+    public function supprimerBien($id)
+    {
+        $bien = bien::findOrFail($id);
+        $bien->delete();
+
+        return redirect()->route('bien.index')->with('status', "Le bien a bien été supprimé avec succès");
+    }
     
 }
