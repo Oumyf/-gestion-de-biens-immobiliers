@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('biens', function (Blueprint $table) {
             $table->id();
             $table->string('nom');
-            $table->string('image');
+            $table->text('image');
             $table->text('description');
             $table->string('adresse');
             $table->enum('statut', ['Disponible', 'Non disponible']);
@@ -32,7 +32,7 @@ return new class extends Migration
         Schema::dropIfExists('biens');
 
 
-        Schema::table('biens', function (Blueprint $table) {            $table->foreignId('bien_id')->references('id')->on('biens')->onDelete('set null');
+        Schema::table('biens', function (Blueprint $table) {
             $table->dropForeign('biens_user_id_foreign');
             $table->dropForeign('biens_categorie_id_foreign');
     
