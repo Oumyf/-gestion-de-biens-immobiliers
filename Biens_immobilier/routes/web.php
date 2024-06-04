@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BienController;
+use App\Http\Controllers\AccueilController;
 use App\Http\Controllers\CommentaireController;
 
 Route::get('/', function () {
@@ -35,3 +36,10 @@ Route::delete('/commentaires/{id}', [CommentaireController::class, 'supprimer'])
 
 Route::get('/inscription', [AuthController::class, 'inscription'])->name('inscription');
 Route::post('/inscription', [AuthController::class, 'inscriptionPost'])->name('inscription');
+
+Route::get('/connexion', [AuthController::class, 'connexion'])->name('connexion');
+Route::post('/connexion', [AuthController::class, 'connexionPost'])->name('connexion');
+
+
+Route::get('/index', [AccueilController::class, 'index'])->name('index');
+Route::delete('/deconnexion', [AuthController::class, 'deconnexion'])->name('deconnexion');
