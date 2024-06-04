@@ -55,6 +55,15 @@ class BienController extends Controller
         return view('bien.listeBiens', compact('biens'));
     }
 
+    public function afficher_details($id){
+        $bien = Bien::findOrFail($id);
+        return view('bien.details', compact('bien'));
+    }
+
+    // App\Http\Controllers\BienController.php
+
+
+
     
     public function modifierBien($id)
     {
