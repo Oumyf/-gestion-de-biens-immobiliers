@@ -1,8 +1,9 @@
 <?php
 
-use App\Http\Controllers\CommentaireController;
-use App\Http\Controllers\BienController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\BienController;
+use App\Http\Controllers\CommentaireController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -19,7 +20,7 @@ Route::get('/supprimer-bien/{id}', [BienController::class, 'supprimerBien'])->na
 
 
 // Route pour créer un nouveau commentaire
-Route::post('/commentaires', [CommentaireController::class, 'store'])->name('commentaires.store');
+Route::get('/commentaires', [CommentaireController::class, 'store'])->name('commentaires.store');
 
 // Route pour afficher le formulaire de modification d'un commentaire
 Route::get('/commentaires/{id}/modifier', [CommentaireController::class, 'modifier'])->name('commentaires.mettre_a_jour');
@@ -30,3 +31,7 @@ Route::put('/commentaires/{id}', [CommentaireController::class, 'modifierTraitem
 // Route pour supprimer un commentaire
 Route::delete('/commentaires/{id}', [CommentaireController::class, 'supprimer'])->name('commentaires.supprimer');
  
+
+
+Route::get('/inscription', [AuthController::class, 'inscription'])->name('inscription');
+Route::post('/inscription', [AuthController::class, 'inscriptionPost'])->name('inscription');
